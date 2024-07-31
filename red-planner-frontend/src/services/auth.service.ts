@@ -4,7 +4,7 @@ import { axiosClassic } from '@/api/interceptors'
 
 import { authTokenService } from './auth-token.service'
 
-export const authService = {
+class AuthService {
   async main(type: 'login' | 'register', data: IAuthForm) {
     const response = await axiosClassic.post<IAuthResponse>(
       `/auth/${type}`,
@@ -16,7 +16,8 @@ export const authService = {
     }
 
     return response
-  },
+  }
+
   async getNewTokens() {
     const response = await axiosClassic.post<IAuthResponse>(
       '/auth/login/access-token',
@@ -27,7 +28,8 @@ export const authService = {
     }
 
     return response
-  },
+  }
+
   async logout() {
     const response = await axiosClassic.post<boolean>('/auth/logout')
 
@@ -36,5 +38,7 @@ export const authService = {
     }
 
     return response
-  },
+  }
 }
+
+export const authService = new AuthService()

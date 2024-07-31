@@ -5,20 +5,24 @@ export enum EnumTokens {
   REFRESH_TOKEN = 'refreshToken',
 }
 
-export const authTokenService = {
+class AuthTokenService {
   getAccessToken() {
     const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN)
 
     return accessToken || null
-  },
+  }
+
   saveTokenStorage(accessToken: string) {
     Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
       domain: 'localhost',
       sameSite: 'strict',
       expires: 1,
     })
-  },
+  }
+
   removeFromStorage() {
     Cookies.remove(EnumTokens.ACCESS_TOKEN)
-  },
+  }
 }
+
+export const authTokenService = new AuthTokenService()
